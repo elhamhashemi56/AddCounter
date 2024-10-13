@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./todo.css"
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 function TodoList(){
+
+    let [grade,setGrade]=useState(1)
+
+    function handleInt(){
+        if(grade >= 1 && grade<6){
+            setGrade(grade=grade+1)
+        }
+       
+    }
+
+    function handleDec(){
+        if(grade>1 && grade<=6){
+            setGrade(grade=grade-1)
+        }
+       
+    }
+//#######################################################    
     return(
         <div className="todoContainer">
             <form>
@@ -26,10 +44,15 @@ function TodoList(){
                 </select>
                 <label for="disabledTextInput">Grade:</label>
                 <div className="gradeContainer mb-2">
-                    <fieldset disabled className="fieldsetKlass"></fieldset>
+                    <fieldset disabled className="fieldsetKlass">{grade}</fieldset>
                     <div>
-                        <button type="button" class="btn btn-primary">Inc</button>
-                        <button type="button" class="btn btn-warning ml-3">Dec</button>
+                       { grade === 6 ?<button type="button"  class="btn btn-secondary ml-3" disabled={isDisabled}>+INC</button>
+                                     :<button type="button" class="btn btn-danger ml-3" onClick={handleInt}>+INC</button>
+                       }
+                       { grade === 1 ?<button type="button"  class="btn btn-secondary ml-3" disabled={isDisabled}>-DEC</button>
+                                     :<button type="button" class="btn btn-danger ml-3" onClick={handleDec}>-DEC</button>
+                       }  
+                        
                     </div>
                     
                 </div>
