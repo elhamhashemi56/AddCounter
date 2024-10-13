@@ -2,34 +2,71 @@ import React, { useState } from "react";
 import "./todo.css"
 import { isDisabled } from "@testing-library/user-event/dist/utils";
 
-function TodoList(){
+function TodoList({todo,setTodo}){
 
-    let [grade,setGrade]=useState(1)
+    const [grade,setGrade]=useState(1)
+    const [fullName,setFullName]=useState("")
+    const [subject,setSubject]=useState("")
 
     function handleInt(){
-        if(grade >= 1 && grade<6){
-            setGrade(grade=grade+1)
+        if(grade<6){
+            setGrade(grade+1)
+            console.log("grade",grade);
+            
         }
        
     }
 
     function handleDec(){
         if(grade>1 && grade<=6){
-            setGrade(grade=grade-1)
+            setGrade(grade-1)
         }
        
     }
+
+    function handleChangeFullName(e){
+        setFullName(e.target.value)
+        console.log(fullName);
+        
+    }
+    
+   
+    const handleChangeSubject=(event)=>{
+        setSubject(event.target.value)
+        console.log(subject);
+        
+    }
+
+    const handleClick=()=>{
+        const copy=[...todo]
+        copy.push({
+            fullName:fullName,
+            subject:subject,
+            grade:grade
+        })
+        setTodo(copy)
+        console.log(copy);
+        setFullName("")
+        setSubject("Please Select your Subject")
+
+        
+    }
+function handleSubmit(event){
+    event.preventDefault()
+}
 //#######################################################    
     return(
         <div className="todoContainer">
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div class="mb-3">
                     <input  class="form-control"
-                            placeholder="Enter Your Name" 
+                            placeholder="Enter Your Name"
+                            value={fullName}
+                            onChange={handleChangeFullName} 
                              
                     />  
                 </div>
-                <select class="form-control mb-3" aria-label="Default select example" >
+                <select class="form-control mb-3" aria-label="Default select example"  onChange={handleChangeSubject} >
                     <option selected>Please Select your Subject</option>
                     <option value="Mathematics">Mathematics</option>
                     <option value="Science">Science (Biology, Chemistry, Physics)</option>
@@ -44,7 +81,18 @@ function TodoList(){
                 </select>
                 <label for="disabledTextInput">Grade:</label>
                 <div className="gradeContainer mb-2">
-                    <fieldset disabled className="fieldsetKlass">{grade}</fieldset>
+                     { (grade===1 || grade===2) &&
+                        <fieldset  disabled className="fieldsetKlass fieldsetGreen">{grade}
+                        </fieldset>
+                     } 
+                     { (grade===3 || grade===4) &&
+                        <fieldset  disabled className="fieldsetKlass fieldsetYellow">{grade}
+                        </fieldset>
+                     }
+                     { (grade===5 || grade===6) &&
+                        <fieldset  disabled className="fieldsetKlass fieldsetRed">{grade}
+                        </fieldset>
+                     }  
                     <div>
                        { grade === 6 ?<button type="button"  class="btn btn-secondary ml-3" disabled={isDisabled}>+INC</button>
                                      :<button type="button" class="btn btn-danger ml-3" onClick={handleInt}>+INC</button>
@@ -60,7 +108,7 @@ function TodoList(){
                    
 
                 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" onClick={handleClick}>Submit</button>
             </form>
         </div>
     )
