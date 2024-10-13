@@ -24,6 +24,18 @@ function TodoList(){
                     <option value="Health Education">Health Education</option>
                     <option value="Career and Technical Education">Career and Technical Education (CTE)</option>
                 </select>
+                <label for="disabledTextInput">Grade:</label>
+                <div className="gradeContainer mb-2">
+                    <fieldset disabled className="fieldsetKlass"></fieldset>
+                    <div>
+                        <button type="button" class="btn btn-primary">Inc</button>
+                        <button type="button" class="btn btn-warning ml-3">Dec</button>
+                    </div>
+                    
+                </div>
+
+                   
+
                 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

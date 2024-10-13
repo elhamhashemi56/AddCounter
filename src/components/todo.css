@@ -5,3 +5,12 @@
     margin: 1rem;
     width: 50%;
 }
+.fieldsetKlass{
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    width: 60%;
+}
+.gradeContainer{
+    display: flex;
+   justify-content:space-between;
+}
