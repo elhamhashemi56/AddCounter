@@ -1,0 +1,7 @@
+.todoContainer{
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    padding: 2rem;
+    margin: 1rem;
+    width: 50%;
+}
